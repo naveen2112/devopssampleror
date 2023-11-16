@@ -1,0 +1,14 @@
+<b>Given ratings</b>
+<br>
+<% ratings = @paper.ratings.group(:rating).count %>
+<%= "5 stars - #{ratings[5] || 0}" %>
+<br>
+<%= "4 stars - #{ratings[4] || 0}" %>
+<br>
+<%= "3 stars - #{ratings[3] || 0}" %>
+<br>
+<%= "2 stars - #{ratings[2] || 0}" %>
+<br>
+<%= "1 star - #{ratings[1] || 0}" %>
+<br>
+<br>

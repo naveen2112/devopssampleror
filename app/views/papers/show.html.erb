@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+<p id="read_status"></p>
+<p>
+  <strong>Name:</strong>
+  <%= @paper.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @paper.category.name %>
+</p>
+
+<p>
+  <strong>Release date:</strong>
+  <%= @paper.release_date %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @paper.language %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <br>
+  <% if @paper.image.attached? %>
+    <%= image_tag @paper.image, style: 'width: 200px;' %>
+  <% end %>
+</p>
+
+<%= render 'ratings/index' %>
+<%= render 'ratings/form' %>
+
+
+<p>
+  <strong>Genres:</strong>
+  <%= @paper.genres.pluck(:name).map(&:humanize).join(", ") %>
+</p>
+
+<h3>Add Genre</h3> <%= render 'genres_papers/form', category: @paper.category ,paper: @paper, genres_paper: @genres_paper || GenresPaper.new %>
+
+<h1>Comments</h1>
+<%= render 'comments/list', comments: @paper.comments %>
+
+<%= render 'comments/form', category: @paper.category ,paper: @paper, comment: Comment.new %>
+
+<%= link_to 'Edit', edit_category_paper_path(@category, @paper) %> |
+<%= link_to 'Back', category_papers_path(@category) %>
+
+<script>
+    $("#read_status").ready(function(){
+        $.ajax({
+            url :'/categories/' + <%= @category.id %> + '/papers/'+ <%= @paper.id %>+'/read',
+            type :"POST"
+        });
+    });
+</script>

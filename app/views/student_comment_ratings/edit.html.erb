@@ -1,0 +1,8 @@
+<h1>Editing User Comment Rating</h1>
+<br><br>
+<h2>
+  <%= @comment.comment %>
+</h2>
+<%= render 'form', student_comment_rating: @student_comment_rating %>
+
+<%= link_to 'Back', topic_posts_path(@topic) %>

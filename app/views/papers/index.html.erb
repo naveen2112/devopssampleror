@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <%= form_tag url_for(:controller => 'papers', :action => 'index'), :method => 'get', :id => 'search_form', :class => 'analytics_reports' do %>
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">From:</label>
+                <div class="col-sm-8">
+                  <%= date_field_tag :from_date, params[:from_date].nil? ? @start_date.to_date : params[:from_date], :id => "from_datepicker", :class => "input-style form-control datepicker" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">To:</label>
+                <div class="col-sm-8" id="select_transaction_number">
+                  <%= date_field_tag :to_date, params[:to_date].nil? ? @end_date.to_date : params[:to_date], :id => "to_datepicker", :class => "input-style form-control datepicker" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-submit">
+                <%= submit_tag "Search", class: 'btn btn1 btn-green', id: 'search' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  <% end %>
+  <table class="table table-bordered">
+
+  <tbody>
+    <%= render 'paper' %>
+  </tbody>
+</table>
+<%= pagy_nav(@pagy).html_safe %>
+
+<br>
+<% if @category.present? %>
+  <%= link_to 'New Paper', new_category_paper_path(@category), id: "new_paper_link", remote: true %>
+<% end %>
+
+  <script>
+    $(document).ready(function () {
+      $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true
+      });
+    });
+
+    $("#search_form").submit(function (event) {
+      var input = $("<input>")
+        .attr("type", "hidden")
+        .attr("name", "offset").val(new Date().getTimezoneOffset());
+      $('#search_form').append($(input));
+      return true;
+    });
+
+  </script>

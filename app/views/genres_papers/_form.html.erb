@@ -1,0 +1,27 @@
+<%= form_for [category, paper, genres_paper] do |f| %>
+  <% if genres_paper.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(genres_paper.errors.count, "error") %> prohibited this action from being saved:</h2>
+
+      <ul>
+        <% genres_paper.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :genre_name %>
+    <input type="text" name="genres_paper[genre_name]" id="genres_paper_genre_name">
+  </div>
+
+  <div class="field" hidden>
+    <%= f.label :paper_id %>
+    <%= f.text_field :paper_id, value: paper.id %>
+  </div>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Add Genre" data-disable-with="Add Genre">
+  </div>
+<% end %>

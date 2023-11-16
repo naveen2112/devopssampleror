@@ -1,0 +1,55 @@
+<%= form_for [@category, paper], remote: true, html: {id: "paper_form"} do |f| %>
+  <div id="error">
+    <% if paper.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
+
+        <ul>
+        <% paper.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field" hidden>
+    <%= f.label :category_id %>
+    <%= f.text_field :category_id, value: @category.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :release_date %>
+    <%= f.datetime_select :release_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :language %>
+    <%= f.text_field :language %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <br>
+    <% if @paper.image.attached? %>
+      <%= image_tag @paper.image, style: 'width: 200px;' %>
+    <% end %>
+    <br>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script>
+  $("#paper_form").submit(function( ) {
+    $("#loader_indicator").show();
+  });
+</script>

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Comment Ratings</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Rating</th>
+    <th>Comment</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @student_comment_ratings.each do |comment_rating| %>
+    <tr>
+      <td><%= comment_rating.student.email %></td>
+      <td><%= comment_rating.rating %></td>
+      <td><%= comment_rating.comment.comment_text %></td>
+      <% if can? :manage , comment_rating %>
+        <td><%= link_to 'Edit', edit_category_paper_comment_student_comment_rating_path(@category,@paper,@comment,comment_rating) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>

@@ -1,0 +1,8 @@
+<% if @paper.errors.any? %>
+  alert("Failed with errors");
+  $('#error').append('<%= j render 'layouts/error', model: @paper %>');
+<% else %>
+  var path = "<%= j category_paper_path(@category, @paper) %>";
+  window.location.href = path
+<% end %>
+$("#loader_indicator").hide();

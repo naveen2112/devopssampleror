@@ -1,0 +1,26 @@
+<ul>
+  <% comments.each do |comment| %>
+    <li><a href="<%= category_paper_comment_student_comment_ratings_path(@category,@paper,comment) %>"> <%= comment.comment_text %> </a></li>
+      <%= form_with(model: [@category,@paper,comment,@student_comment_rating])   do |f| %>
+        <table>
+          <tr>
+            <div class="field">
+              <td><%= f.radio_button(:rating, "5") %> <%= f.label(:rating, "5") %></td>
+              <td><%= f.radio_button(:rating, "4") %> <%= f.label(:rating, "4") %></td>
+              <td><%= f.radio_button(:rating, "3") %> <%= f.label(:rating,  "3") %></td>
+              <td><%= f.radio_button(:rating, "2") %> <%= f.label(:rating,  "2") %></td>
+              <td><%= f.radio_button(:rating, "1") %> <%= f.label(:rating,  "1") %></td>
+            </div>
+            <td>
+
+              <div class="actions">
+                <%= f.submit "Rate comment" %>
+              </div>
+              <%= f.hidden_field :comment_id, :value => comment.id %>
+            </td>
+          </tr>
+        </table>
+
+      <% end %>
+  <% end %>
+</ul>

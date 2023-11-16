@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Untitled</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css">
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="loader_indicator" class="loader_indicator"></div>
+    <div style="float: right">
+      <% if student_signed_in? %>
+        <%= link_to "Edit profile", edit_student_registration_path, class: "navbar-link" %> |
+        <%= link_to "Logout", destroy_student_session_path, method: :delete, class: "navbar-link"  %>
+      <% else %>
+        <%= link_to "Sign up", new_student_registration_path, class: "navbar-link"  %> |
+        <%= link_to "Login", new_student_session_path, class: "navbar-link"  %>
+      <% end %>
+    </div>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<%= form_with(model: [@topic,@post,@comment,@student_comment_rating])   do |f| %>
+  <table>
+    <tr>
+      <div class="field">
+        <td><%= f.radio_button(:rating, "5") %> <%= f.label(:rating, "Very good") %></td>
+        <td><%= f.radio_button(:rating, "4") %> <%= f.label(:rating, "good") %></td>
+        <td><%= f.radio_button(:rating, "3") %> <%= f.label(:rating,  "normal") %></td>
+        <td><%= f.radio_button(:rating, "2") %> <%= f.label(:rating,  "bad") %></td>
+        <td><%= f.radio_button(:rating, "1") %> <%= f.label(:rating,  "very bad") %></td>
+      </div>
+      <td><div class="actions">
+        <%= f.submit "rating for the comment",:class => "btn bg-dark text-white" %>
+      </div></td>
+    </tr>
+  </table>
+<% end %>

@@ -1,0 +1,27 @@
+<%= form_for [category, paper, comment] do |f| %>
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this paper from being saved:</h2>
+
+      <ul>
+        <% comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :comment_text %>
+    <%= f.text_area :comment_text %>
+  </div>
+
+  <div class="field" hidden>
+    <%= f.label :paper_id %>
+    <%= f.text_field :paper_id, value: paper.id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

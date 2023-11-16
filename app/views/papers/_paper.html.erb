@@ -1,0 +1,28 @@
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Category</th>
+  <th>Release date</th>
+  <th>Language</th>
+  <th>Read/Unread</th>
+  <th>Average Rating</th>
+  <th>Comments Count</th>
+  <th colspan="3"></th>
+</tr>
+</thead>
+<% @papers.each do |paper| %>
+  <tr>
+    <td><%= paper.name %></td>
+    <td><%= paper.category&.name %></td>
+    <td><%= paper.release_date %></td>
+    <td><%= paper.language %></td>
+    <td><%= current_student.paper_read_status_ids.include?(paper.id) ? "Read" : "Unread" %></td>
+    <td><%= paper.average_rating %></td>
+    <td><%= paper.comments.size %></td>
+    <td><%= link_to 'Show', category_paper_path(paper.category, paper) %></td>
+    <% if can? :manage, paper %>
+      <td><%= link_to 'Edit', edit_category_paper_path(paper.category, paper) %></td>
+      <td><%= link_to 'Destroy', category_paper_path(paper.category, paper), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>

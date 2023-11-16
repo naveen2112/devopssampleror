@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="col-sm-9">
+    <!--Selection Area-->
+    <div class="tab-filter panel panel-default">
+      <div class="panel-body">
+        <%= form_for(category) do |f| %>
+          <% if category.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+              <ul>
+                <% category.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="field">
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.label :name, class: "form-label" %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+
+              <div class="field">
+                <div class="col-md-6">
+                  <%= f.label :category_code, class: "form-label" %>
+                  <%= f.text_field :category_code, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :description, class: "form-label" %>
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+          <br>
+          <div class="actions">
+            <%= f.submit class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

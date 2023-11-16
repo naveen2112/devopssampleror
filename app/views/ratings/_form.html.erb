@@ -1,0 +1,13 @@
+<b>Add rating</b>
+<%= form_for [@paper.category, @paper, @paper.ratings.new] do |ratings| %>
+  <div class="form-group">
+    <%= ratings.radio_button :rating, 5 %>5 stars
+    <%= ratings.radio_button :rating, 4 %>4 stars
+    <%= ratings.radio_button :rating, 3 %>3 stars
+    <%= ratings.radio_button :rating, 2 %>2 stars
+    <%= ratings.radio_button :rating, 1 %>1 star
+    <br>
+  </div>
+  <%= ratings.submit 'Add rating' %>
+<% end %>
+<br>
