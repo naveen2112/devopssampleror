@@ -19,8 +19,3 @@ DATABASE_PASSWORD=admin123 \
 DATABASE_HOSTNAME=rorbill.cfetpjdspyv9.ap-south-1.rds.amazonaws.com \
 DATABASE_PORT=5432
 RUN export SECRET_KEY_BASE=$(bundle exec rake secret) && echo "export SECRET_KEY_BASE=$SECRET_KEY_BASE" >> ~/.bashrc
-RUN rake db:create
-RUN rake db:migrate
-RUN rake assets:precompile
-EXPOSE 3000
-CMD ["bash", "-c", "RAILS_ENV=production bundle exec rails s"]
