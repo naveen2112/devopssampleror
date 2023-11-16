@@ -1,5 +1,5 @@
-FROM ruby:2.7.3
-RUN gem install rails -v 6.1.3
+FROM ruby:3.2.1
+RUN gem install rails -v 6.1.7
 RUN apt update -y && \ 
 apt install -y git-core curl zlib1g-dev build-essential \
 libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 \
@@ -12,7 +12,15 @@ WORKDIR /var/www/
 RUN git clone https://github.com/naveen2112/devopsrorbilling.git
 WORKDIR /var/www/devopsrorbilling
 RUN bundle install
+ENV RAILS_ENV=production \
+DATABASE_NAME=postgres \
+DATABASE_USERNAME=postgres \
+DATABASE_PASSWORD=admin123 \
+DATABASE_HOSTNAME=rorbill.cfetpjdspyv9.ap-south-1.rds.amazonaws.com \
+DATABASE_PORT=5432
 RUN export SECRET_KEY_BASE=$(bundle exec rake secret) && echo "export SECRET_KEY_BASE=$SECRET_KEY_BASE" >> ~/.bashrc
-COPY ./script.sh /rails/bin
-RUN chmod +X /rails/bin/script.sh
-ENTRYPOINT ["/rails/bin/script.sh"]
+RUN rake db:create
+RUN rake db:migrate
+RUN rake assets:precompile
+EXPOSE 3000
+CMD ["bash", "-c", "RAILS_ENV=production bundle exec rails s"]
