@@ -14,6 +14,7 @@ WORKDIR /var/www
 RUN git clone https://github.com/naveen2112/devopssampleror.git
 WORKDIR  /var/www/devopssampleror
 RUN bundle install
+RUN yarn install --ignore-engines -y
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT [ "./entrypoint.sh" ]
 CMD [ "bundle", "exec", "rails", "s" ]
